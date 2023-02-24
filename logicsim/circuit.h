@@ -22,7 +22,9 @@ class Circuit
 		uint64_t m_current_time;
     std::vector<Gate*> m_gates;
     std::vector<Wire*> m_wires;
-		// we need to add the m_pq data member. It should be a min-heap of Event*;
+		// m_pq data member using my Heap class 
+		// which uses Event* and Eventless() functor
+		Heap<Event*, EventLess> m_pq; 
         
 };
 

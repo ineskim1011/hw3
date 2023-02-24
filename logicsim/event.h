@@ -9,8 +9,14 @@ struct Event
     char state;
 };
 
+// new EventLess functor for help implementation 
 typedef struct EventLess {
-        //write the operator() required to make this a functor that compares Events by time
+    // takes 2 Event*'s as input 
+    bool operator()(Event* e1, Event* e2) {
+        // uses time data member to create a in-heap 
+        // by returning TRUE if LHS is less than RHS
+        return (e1->time) < (e2->time);
+    }
 } EventLess;
 	
 #endif

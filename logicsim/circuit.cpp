@@ -4,8 +4,7 @@
 #include <sstream>
 #include <fstream>
 
-//#include "../heap.h" //bring in your heap implementation
-#include "../heap.h"
+//#include "../heap.h"
 #include "wire.h"
 #include "gate.h"
 #include "circuit.h"
@@ -13,7 +12,7 @@
 
 Circuit::Circuit() : m_current_time(0)
 {
-    
+
 }
 
 Circuit::~Circuit()
@@ -109,7 +108,17 @@ bool Circuit::parse(const char* fname)
                     getline(ss, s_output, ',');
                     m_gates.push_back(new Or2Gate(m_wires[stoi(s_in1)], m_wires[stoi(s_in2)], m_wires[stoi(s_output)]));
                 }
-                //Add code here to support the NOT gate type
+                // code to implement NOT gate 
+                if(s_type == "NOT")
+                {
+                    // only requires 1 input 
+                    // rather than 2 
+                    std::string s_in1;
+                    getline(ss, s_in1, ',');
+                    std::string s_output;
+                    getline(ss, s_output, ',');
+                    m_gates.push_back(new NotGate(m_wires[stoi(s_in1)], m_wires[stoi(s_output)]));
+                }
             }
         }
         if(line == "INJECT")

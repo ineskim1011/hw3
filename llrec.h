@@ -77,14 +77,36 @@ Node* llfilter(Node* head, Comp pred);
 // implement the above function now.
 //*****************************************************************************
 
+// declare typename template for comparator 
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
 {
-    //*********************************************
-    // Provide your implementation below
-    //*********************************************
+	// base case: returns NULL if front element or current 
+	// element at hand does not exist 
+  if (!head) {
+    return NULL;
+  }
 
+	// recursive call: Node* returned is set equal to a current 
+	// Node* 
+  Node* curr = llfilter(head->next, pred);
 
+	// if current element should not be filtered, 
+	// set next element equal to curr pointer (declared previously)
+	// and return current element 
+	if (!pred(head->val)) {
+		head->next = curr;
+		return head;
+	}
+	
+	// if current element should be filtered, 
+	// declare temp Node* to delete Object and 
+	// return curr pointer (declared above)
+	else {
+		Node* temp = head;
+		delete temp;
+		return curr;
+	}
 }
 
 #endif
